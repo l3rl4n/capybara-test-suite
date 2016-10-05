@@ -9,7 +9,7 @@
 require 'capybara/rspec'
 require 'bundler'
 Bundler.require(:default)
-# require_all 'lib'
+require_all 'spec/lib'
 
 Capybara.default_driver = :selenium
 Capybara.register_driver :selenium do |app|

@@ -2,18 +2,18 @@ require 'spec_helper'
 
 feature 'Login to SalesLoft Account' do
 
-  let(:email)    { 'brian@aol.com'      }
-  let(:password) { 'super_duper_secret' }
+  let(:login_page) {  LoginPage.new       }
 
   background do
-    visit 'http://accounts.salesloft.com/sign_in'
+    login_page.visit_page
   end
 
-  scenario 'Login to my account' do
-    expect(page.title).to eq('SalesLoft')
-    page.fill_in 'Email',    :with => ENV['EMAIL']    || email
-    page.fill_in 'Password', :with => ENV['PASSWORD'] || password
-    click_button 'Login'
+  scenario 'Check out all the fun stuff on the templates page' do
+    login_page.login
+    login_page.goto('Templates')
+
+
+    binding.pry
   end
 
 end
