@@ -1,0 +1,35 @@
+dynamic_values:
+  person_tags:
+    first_name: George
+    last_name: Burdell
+    company: GTU, Inc
+    name: George P. Burdell
+    title: Chairman
+    industry: Computers
+    email_address: g.p.burdell@example.net
+    city: Atlanta
+    state: GA
+    country: USA
+    time_zone: Eastern Time (US & Canada)
+
+  company_tags:
+    Company.name:
+    Company.conversational_name:
+    Company.domain:
+    Company.description:
+    Company.industry:
+    Company.size:
+    Company.website:
+    Company.twitter_handle:
+    Company.city:
+    Company.state:
+    Company.country:
+
+  time_tags:
+    n_days_from_now:
+    n_business_days_from_now:
+    n_days_ago:
+    n_business_days_ago:
+
+  misc:
+    'http://opt-out-link':

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'Login to SalesLoft Account' do
+feature 'Login to my SalesLoft Account' do
 
   let(:login_page)     { LoginPage.new     }
   let(:templates_page) { TemplatesPage.new }
@@ -9,7 +9,9 @@ feature 'Login to SalesLoft Account' do
     login_page.visit_page
   end
 
-  scenario 'Check out all the fun stuff on the templates page' do
+  scenario 'and check out all the fun stuff on the templates page' do
+
+    options = { debug: true }
 
     login_page.login
     login_page.goto('Templates')
@@ -17,10 +19,9 @@ feature 'Login to SalesLoft Account' do
     templates_page.verify_page
     templates_page.clear_templates if templates_page.number_of_templates >= 1
 
-    templates_page.add_new_template
+    templates_page.add_new_template 1, options
 
-
-    binding.pry
+    # binding.pry
   end
 
 end

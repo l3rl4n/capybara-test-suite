@@ -8,6 +8,7 @@
 
 require 'capybara/rspec'
 require 'bundler'
+# require 'yaml'
 Bundler.require(:default)
 require_all 'spec/lib'
 
