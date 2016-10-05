@@ -1,15 +1,18 @@
 class LoginPage < CommonPage
   include Capybara::DSL
 
-  def email_text;    'Email'             end
-  def password_text; 'Password'          end
-  def login_text;    'Login'             end
-  def page_title;    'SalesLoft Cadence' end
+  def email_text;    'Email'      end
+  def password_text; 'Password'   end
+  def login_text;    'Login'      end
+  def page_title;    'SalesLoft'  end
 
   def visit_page
     # Just in case you wanted to use the base_url, which Im not :)
-    visit ENV['base_url'] || 'http://accounts.salesloft.com/sign_in'
-    assert_title('SalesLoft')
+    url = ENV['base_url'] ?
+            (ENV['base_url'] + '/sign_in') :
+            'http://accounts.salesloft.com/sign_in'
+    visit url
+    assert_title(page_title)
   end
 
   def login(email='luggage@spaceballs.net', password='12345')
@@ -21,13 +24,6 @@ class LoginPage < CommonPage
     fill_in email_text,    with: ENV['email']    || email
     fill_in password_text, with: ENV['password'] || password
     click_button login_text
-    assert_title(page_title)
-    verify_link('Templates')
     end
-
-  def verify_link link
-    link_found = find_link(link).visible?
-    raise "\nCould not find the Templates link after logging in. Check credentials and whats passed in rake task\n\n" unless link_found
-  end
 
 end

@@ -2,7 +2,8 @@ require 'spec_helper'
 
 feature 'Login to SalesLoft Account' do
 
-  let(:login_page) {  LoginPage.new       }
+  let(:login_page)     { LoginPage.new     }
+  let(:templates_page) { TemplatesPage.new }
 
   background do
     login_page.visit_page
@@ -11,6 +12,7 @@ feature 'Login to SalesLoft Account' do
   scenario 'Check out all the fun stuff on the templates page' do
     login_page.login
     login_page.goto('Templates')
+    templates_page.verify_page
 
 
     binding.pry
