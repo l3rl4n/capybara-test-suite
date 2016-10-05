@@ -1,10 +1,11 @@
 class LoginPage < CommonPage
   include Capybara::DSL
 
-  def email_text;    'Email'      end
-  def password_text; 'Password'   end
-  def login_text;    'Login'      end
   def page_title;    'SalesLoft'  end
+
+  def set_email(text);    fill_in 'Email',    with: ENV['email']    || text end
+  def set_password(text); fill_in 'Password', with: ENV['password'] || text end
+  def click_login;        click_button 'Login'                              end
 
   def visit_page
     # Just in case you wanted to use the base_url, which Im not :)
@@ -21,9 +22,9 @@ class LoginPage < CommonPage
       Try rerunning this again with:
       - rake email=real_email@aol.com password=Op3nSes4me\n\n".red
     end
-    fill_in email_text,    with: ENV['email']    || email
-    fill_in password_text, with: ENV['password'] || password
-    click_button login_text
+    set_email email
+    set_password password
+    click_login
     end
 
 end

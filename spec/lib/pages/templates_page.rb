@@ -17,7 +17,7 @@ class TemplatesPage < CommonPage
 
   def check_all_template_aspects index
     set_template_name("Template ##{index}")
-    set_template_subject('Subject for Template #' + index)
+    set_template_subject('Subject for Template #' + index.to_s)
 
     binding.pry
   end
