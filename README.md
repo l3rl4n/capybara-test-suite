@@ -1,4 +1,4 @@
-# Capybara + Rspec Suite
+# Capybara + RSpec Suite
 
 ### Install them gems!
 
