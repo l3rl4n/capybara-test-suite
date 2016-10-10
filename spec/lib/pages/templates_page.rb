@@ -42,7 +42,21 @@ class TemplatesPage < CommonPage
                   " {{#{dynamic_item}}}")
       end
     end
-    assert_text(:visible, str, { count:1 })
+
+    # Sometimes the dropdown isn't shown if you click away from the browser
+    tries = 3
+    begin
+      assert_text(:visible, str, { count:1 })
+    rescue
+      tries -= 1
+      print "In rescue - Attempts left: #{tries}\n".yellow
+      if tries >= 0
+        insert_dynamic_field_dropdown
+        retry
+      else
+        raise "\nFailed matching text for Dynamic Content in New Template\n\n"
+      end
+    end
   end
 
   def add_new_template options
