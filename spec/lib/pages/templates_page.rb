@@ -2,26 +2,25 @@ class TemplatesPage < CommonPage
 
   def page_title; 'SalesLoft Cadence' end
 
-  def select_all_templates;       first(:input,'input.sl-checkbox').set(true) end
-  def number_of_templates;        all('td.template-checkboxes').size          end
-  def trash_can;                  find('i.qa-template-delete')                end
-  def confirm_delete;             find('a.btn-warning')                       end
+  # Header
+  def profile_dropdown;              find('i.fa-user')                        end
 
-  def template_actions;           find('a.qa-template-actions')               end
-  def add_template;               find('a.qa-template-create')                end
-  def export_template;            find('a.qa-template-export')                end
+  # Template Window
+  def select_all_templates;          first('input.sl-checkbox').set(true)     end
+  def number_of_templates;           all('td.template-checkboxes').size       end
+  def trash_can;                     find('i.qa-template-delete')             end
+  def confirm_delete;                find('a.btn-warning')                    end
+
+  def template_actions;              find('a.qa-template-actions')            end
+  def add_template;                  find('a.qa-template-create')             end
+  def export_template;               find('a.qa-template-export')             end
 
   # New Template
-  def set_template_name(text);       fill_in('title', with:text)              end
-  def set_template_subject(text);    fill_in('emailSubject', with: text)      end
+  def template_name;                 find('input.qa-template-input-name')     end
+  def template_subject;              find('input.qa-template-input-subject')  end
+  def template_body;                 find('div.note-editable')                end
   def insert_dynamic_field_dropdown; find('i.qa-dynamic-tags-button').click   end
-
-  def check_all_template_aspects index, debug
-    set_template_name("Template ##{index}")
-    set_template_subject('Subject for Template #' + index.to_s)
-    check_all_dynamic_data_is_available debug
-    binding.pry
-  end
+  def save_template;                 find('a.qa-template-save').click         end
 
   def check_all_dynamic_data_is_available debug = false
     str   = ''
@@ -43,13 +42,24 @@ class TemplatesPage < CommonPage
                   " {{#{dynamic_item}}}")
       end
     end
-    assert_text(str)
+    assert_text(:visible, str, { count:1 })
   end
 
-  def add_new_template index=1, options
+  def add_new_template options
+    open_new_template
+    fill_in_template options
+    save_template
+  end
+
+  def open_new_template
     template_actions.click
     add_template.click
-    check_all_template_aspects index, options[:debug]
+  end
+
+  def fill_in_template options
+    [:name, :subject, :body].each do |input|
+        self.send("template_#{input}").set options[input]
+    end
   end
 
   def clear_templates
