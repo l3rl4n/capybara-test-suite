@@ -26,8 +26,9 @@ class LoginPage < CommonPage
       Try rerunning this again with:
       - rake email=real_email@aol.com password=Op3nSes4me\n\n".red
     end
-    set_email email
-    set_password password
+    user = User.new(email, password)
+    set_email user.email
+    set_password user.password
     click_login
   end
 
