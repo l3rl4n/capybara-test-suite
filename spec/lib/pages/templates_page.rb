@@ -49,7 +49,7 @@ class TemplatesPage < CommonPage
       assert_text(:visible, str, { count:1 })
     rescue
       tries -= 1
-      print "In rescue - Attempts left: #{tries}\n".yellow
+      print "In rescue - Attempts left: #{tries}\n".yellow if debug
       if tries >= 0
         insert_dynamic_field_dropdown
         retry

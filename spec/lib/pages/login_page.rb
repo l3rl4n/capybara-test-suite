@@ -3,7 +3,7 @@ class LoginPage < CommonPage
 
   def page_title;         'SalesLoft'                                 end
 
-  def email_input;        find('input#user_email',visible: true)                    end
+  def email_input;        find('input#user_email')                    end
   def password_input;     find('input#user_password')                 end
 
   def set_email(text);    email_input.set(ENV['email'] || text)       end
@@ -33,13 +33,6 @@ class LoginPage < CommonPage
   end
 
   def already_logged_in
-    # begin
-    #   logged_in = has_no_field?('Email') and find('i.fa-user').visible?
-    # rescue
-    #   binding.pry
-    # end
-    # print "Found already logged in...\n".yellow if logged_in
-    # logged_in
     has_no_field?('Email') and find('i.fa-user').visible?
   end
 

@@ -35,7 +35,7 @@ feature 'Login to my SalesLoft Account' do
 
   scenario 'and I verify all the dynamic content hasnt changed' do
     templates_page.open_new_template
-    templates_page.check_all_dynamic_data_is_available debug=false
+    templates_page.check_all_dynamic_data_is_available options[:debug]
 
   end
 
