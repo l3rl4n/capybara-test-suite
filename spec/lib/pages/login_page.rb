@@ -5,9 +5,6 @@ class LoginPage < CommonPage
 
   def email_input;        find('input#user_email')                    end
   def password_input;     find('input#user_password')                 end
-
-  def set_email(text);    email_input.set(ENV['email'] || text)       end
-  def set_password(text); password_input.set(ENV['password'] || text) end
   def click_login;        click_button 'Login'                        end
 
   def visit_page
@@ -27,8 +24,8 @@ class LoginPage < CommonPage
       - rake email=real_email@aol.com password=Op3nSes4me\n\n".red
     end
     user = User.new(email, password)
-    set_email user.email
-    set_password user.password
+    email_input.set(user.email)
+    password_input.set(user.password)
     click_login
   end
 
