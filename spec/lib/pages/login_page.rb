@@ -16,16 +16,15 @@ class LoginPage < CommonPage
     assert_title(page_title)
   end
 
-  def login(email='luggage@spaceballs.net', password='12345')
+  def login
     return if already_logged_in
     unless ENV['email']
       print "\nI noticed you are going to use the parameter defaults when trying to login, which wont actually work.
       Try rerunning this again with:
       - rake email=real_email@aol.com password=Op3nSes4me\n\n".red
     end
-    user = User.new(email, password)
-    email_input.set(user.email)
-    password_input.set(user.password)
+    email_input.set(ENV['email'])
+    password_input.set( ENV['password'])
     click_login
   end
 

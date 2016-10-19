@@ -45,18 +45,21 @@ class TemplatesPage < CommonPage
 
     # Sometimes the dropdown isn't shown if you click away from the browser
     tries = 3
-    begin
-      assert_text(:visible, str, { count:1 })
-    rescue
-      tries -= 1
-      print "In rescue - Attempts left: #{tries}\n".yellow if debug
-      if tries >= 0
-        insert_dynamic_field_dropdown
-        retry
-      else
-        raise "\nFailed matching text for Dynamic Content in New Template\n\n"
-      end
-    end
+    # begin
+    # binding.pry
+      # assert_text(:visible, str, { count:1 })
+    #
+    # rescue
+    #   print "In rescue - Attempts left: #{tries}\n".yellow if debug
+    #   tries -= 1
+    #   if tries >= 0
+    #     insert_dynamic_field_dropdown
+    #     retry
+    #   else
+        binding.pry
+        raise "\nFailed matching text for Dynamic Content in New Template\n\n" unless find('ul.qa-dynamic-tags').text.eql?(str)
+    #   end
+    # end
   end
 
   def add_new_template options
