@@ -12,6 +12,11 @@ feature 'Login to my SalesLoft Account' do
     login_page.goto('Templates')
   end
 
+  scenario 'and load my speedtest chrome extension' do
+    binding.pry
+    puts 'sd'
+  end
+
   scenario 'and make sure the login page has the correct title and the Templates link' do
     templates_page.verify_page
   end

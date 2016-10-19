@@ -12,13 +12,16 @@ require 'bundler'
 Bundler.require(:default)
 require_all 'spec/lib'
 
-Capybara.default_driver = :selenium
-Capybara.register_driver :selenium do |app|
-  Capybara::Selenium::Driver.new(app, :browser => :chrome)
-end
+unpacked_chrome = 'chrome_extension_unzipped/speedtest'
 
-# Capybara.run_server = false
-#
-# RSpec.configure do |config|
-#   config.run_all_when_everything_filtered = true
-# end
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app,
+                                 :browser => :chrome,
+                                 :switches => [
+                                     '--load-extension=' + unpacked_chrome,
+                                     '--ignore-certificate-errors'
+                                 ]
+                                 # :http_client => client
+  )
+end
+Capybara.default_driver = :selenium
